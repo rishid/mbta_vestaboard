@@ -8,8 +8,6 @@ import operator
 import os
 from pprint import pprint
 
-# url = 'https://api-v3.mbta.com/predictions?filter[stop]=place-sstat,place-north&filter[route_type]=2&filter[stop_sequence]=1&include=stop,route,schedule';
-
 def lookup(container, keys, default=None):
     try:
         return reduce(operator.getitem, keys, container)
@@ -47,8 +45,8 @@ def get_predictions(included):
 
 # FILTERS -
 # filter[stop]=WML-0214-01,WML-0214-02 -> Framingham inbound and outbound
-# filter[route_type]=2 -> only looks at predictions for commuter rails
-# include=stop,route,schedule -> to get information from the related stops, routes, schedules needed to the board
+# filter[route_type]=2 -> only looks at schedules for commuter rails
+# include=stop,route,prediction -> to get information from the related stops, routes, prediction needed to the board
 url = 'https://api-v3.mbta.com/schedules?filter[stop]=WML-0214-01,WML-0214-02&filter[route_type]=2&include=stop,route,prediction'
 
 try:
