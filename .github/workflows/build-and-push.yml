@@ -19,8 +19,8 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}  # The token provided by GitHub for the workflow to authenticate
 
     - name: Build Docker image
-      run: docker build -t ghcr.io/${{ github.repository_owner }}/${{ github.repository_name }}:latest .
+      run: docker build -t ghcr.io/${{ github.repository }}:latest .
       
     - name: Push Docker image
       run: |
-        docker push ghcr.io/${{ github.repository_owner }}/${{ github.repository_name }}:latest
+        docker push ghcr.io/${{ github.repository }}:latest
