@@ -1,0 +1,26 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}  # The token provided by GitHub for the workflow to authenticate
+
+    - name: Build Docker image
+      run: docker build -t ghcr.io/${{ github.repository_owner }}/${{ github.repository_name }}:latest .
+      
+    - name: Push Docker image
+      run: |
+        docker push ghcr.io/${{ github.repository_owner }}/${{ github.repository_name }}:latest
